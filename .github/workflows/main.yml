@@ -1,0 +1,42 @@
+name: Arduino Build
+on: [push]
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout repository
+      uses:  actions/checkout@v4
+
+    - name: Compile sketch for project_6_photocell_sensor Arduino UNO
+      uses: arduino/compile-sketches@v1
+      with:
+        fqbn: arduino:avr:uno
+        sketch-paths: |
+          project_6_photocell_sensor
+        cli-compile-flags: |
+          - --export-binaries
+
+    - name: Compile sketch for project_13_soil_humidity_sensor Arduino UNO
+      uses: arduino/compile-sketches@v1
+      with:
+        fqbn: arduino:avr:uno
+        sketch-paths: |
+          project_13_soil_humidity_sensor
+        cli-compile-flags: |
+          - --export-binaries
+
+    - name: Upload compiled project_6_photocell_sensor HEX artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: project_6_photocell_sensor
+        path: |
+          project_6_photocell_sensor/build/arduino.avr.uno/*.hex
+        retention-days: 30
+    
+    - name: Upload compiled project_13_soil_humidity_sensor HEX artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: project_13_soil_humidity_sensor
+        path: |
+          project_13_soil_humidity_sensor/build/arduino.avr.uno/*.hex
+        retention-days: 30
