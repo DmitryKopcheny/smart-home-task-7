@@ -13,6 +13,8 @@ jobs:
         fqbn: arduino:avr:uno
         sketch-paths: |
           project_6_photocell_sensor
+        libraries: |
+          - name: "LiquidCrystal_I2C"
         cli-compile-flags: |
           - --export-binaries
 
@@ -22,6 +24,8 @@ jobs:
         fqbn: arduino:avr:uno
         sketch-paths: |
           project_13_soil_humidity_sensor
+        libraries: |
+        #  - name: "LiquidCrystal_I2C"
         cli-compile-flags: |
           - --export-binaries
 
